@@ -39,6 +39,11 @@ class Saga
         $this->livre = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->nomSaga;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

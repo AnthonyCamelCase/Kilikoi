@@ -32,7 +32,7 @@ class Livre
     /**
      * @ORM\Column(type="integer")
      */
-    private $nombrePage;
+    private $nombreMots;
 
     /**
      * @ORM\ManyToOne(targetEntity=Saga::class, inversedBy="livre")
@@ -54,6 +54,11 @@ class Livre
     {
         $this->commentaires = new ArrayCollection();
         $this->listeDeLectures = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->titre;
     }
 
     public function getId(): ?int
@@ -85,14 +90,14 @@ class Livre
         return $this;
     }
 
-    public function getNombrePage(): ?int
+    public function getNombreMots(): ?int
     {
-        return $this->nombrePage;
+        return $this->nombreMots;
     }
 
-    public function setNombrePage(int $nombrePage): self
+    public function setNombreMots(int $nombreMots): self
     {
-        $this->nombrePage = $nombrePage;
+        $this->nombreMots = $nombreMots;
 
         return $this;
     }
