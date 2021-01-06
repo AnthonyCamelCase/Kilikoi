@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> {% block stylesheets %}{% endblock %}
+		</head>
+		<header>
+			<!-- navbar -->
+			<nav class="navbar navbar-expand navbar-dark bg-danger mb-4">
+				<a class="navbar-brand font-weight-bold" href="#">KILIKOI</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarsExample02">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="/">Accueil</a>
+						</li>
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link" href="/profile">Profil</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/logout">Se déconnecter</a>
+							</li>
+							{% for role in app.user.roles %}
+								{% if role ==  "ROLE_ADMIN" %}
+									<a class="nav-link" href="/gestion" target="_blank">Administration</a>
+								{% endif %}
+							{% endfor %}
+
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="/login">Se connecter</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/register">S'inscrire</a>
+							</li>
+						{% endif %}
+					</ul>
+					<!-- search bar -->
+                    
+                    <!--
+                    <form class="form-inline my-2 my-md-0">
+						<input class="form-control" type="text" placeholder="Search">
+					</form>
+                    -->
+				</div>
+			</nav>
+			<!-- navbar -->
+		</header>
+		<body class="bg-warning">
+			{% block body %}{% endblock %}
+			{% block javascripts %}{% endblock %}
+		</body>
+        <footer class="bg-danger text-light mt-4">
+
+            <p class="text-center">2021 - Copyright JustWeBorn Project - Site Kilikoi</p>
+
+        </footer>
+	</html>
+
