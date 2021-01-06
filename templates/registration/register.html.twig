@@ -3,21 +3,37 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
 
-    <h1>Inscription</h1>
+<div class="text-center container border border-danger shadow  bg-white rounded">
+    <div class="d-flex flex-column align-items-center mb-3 ">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms, {
-            label: 'Accepter la charte de bon comportement'
-        }) }}
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
 
-        <button type="submit" class="btn">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+        <img class=" text-center mb-4" src="{{ asset('image/logo_kilikoi.jpg')}}" alt="" width="144" height="144">
+
+
+        {{ form_start(registrationForm) }}
+            <div class="mb-2">{{ form_label(registrationForm.email) }}</div>
+            <div class="mb-4 ">{{ form_widget(registrationForm.email, { 'attr': {'placeholder': "exemple@mail.fr"}}) }}</div>
+
+
+            <div class="mb-2">{{ form_label(registrationForm.pseudo) }}</div>
+            <div class="mb-4">{{ form_widget(registrationForm.pseudo, { 'attr': {'placeholder': "restez correct"}}) }}</div>
+
+            
+            <div class="mb-2">{{ form_label(registrationForm.plainPassword) }}</div>
+            <div class="mb-4">{{ form_widget(registrationForm.plainPassword, { 'attr': {'placeholder': "+ de 6 caractères"}}) }}</div>
+
+
+            <div class="mb-4">{{ form_row(registrationForm.agreeTerms, {
+                label: 'Accepter la charte de bon comportement'
+            }) }}</div>
+
+            <button type="submit" class="btn btn-lg btn-danger">S'inscrire</button>
+
+            {{ form_end(registrationForm) }}
+    </div>
+</div>
 {% endblock %}

@@ -39,16 +39,6 @@ class Utilisateur implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $Nom;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $Prenom;
-
-    /**
      * @ORM\OneToMany(targetEntity=ListeDeLecture::class, mappedBy="utilisateur")
      */
     private $listeDeLectures;
@@ -58,6 +48,11 @@ class Utilisateur implements UserInterface
      */
     private $commentaires;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
+
     public function __construct()
     {
         $this->listeDeLectures = new ArrayCollection();
@@ -66,7 +61,7 @@ class Utilisateur implements UserInterface
 
     public function __toString()
     {
-        return $this->email;
+        return $this->pseudo;
     }
 
     public function getId(): ?int
@@ -82,6 +77,18 @@ class Utilisateur implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
@@ -115,6 +122,7 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+
     /**
      * @see UserInterface
      */
@@ -147,29 +155,6 @@ class Utilisateur implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->Nom;
-    }
-
-    public function setNom(?string $Nom): self
-    {
-        $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->Prenom;
-    }
-
-    public function setPrenom(?string $Prenom): self
-    {
-        $this->Prenom = $Prenom;
-
-        return $this;
-    }
 
     /**
      * @return Collection|ListeDeLecture[]
