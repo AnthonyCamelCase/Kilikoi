@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ app.user}}!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Hello {{ app.user }}! </h1>
+
+    <ul>
+        <li> Email : {{ app.user.email }}</li>
+        <li> Pseudo : {{ app.user }}</li>
+        <li>Nombre de livres lus : {{ nbLivres }}</li>
+        <li>Nombre de mots lus : {{ nbMots }} </li>
+        <li> Liste de lecture : 
+        {% for liste in listes %} 
+           
+            <ul> {{ liste.nomListe }}
+                {% for livre in liste.Livre %}
+                    <li>{{ livre.titre }}</li>
+                {% endfor %}
+            </ul>           
+        </li>
+        {% endfor %}
+        <li> Liste des commentaires : </li>
+    </ul>  
+</div>
+{% endblock %}
