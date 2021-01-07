@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LivreController!{% endblock %}
+
+{% block body %}
+
+
+<h1 class="text-center mb-3">{{ livre.titre }}</h1>
+
+<h2 class="text-center mb-4">de {{ livre.auteur }}</h2>
+
+<hr>
+
+
+<img class="mx-auto d-block mb-4 mt-4" src="{{ asset('image/'~ livre.titre ~ '.jpg' )}}" width="305" height="500" alt="couvertureDeLivre">
+<div class="container ">
+
+<ul class="list-unstyled text-center">
+    {% if livre.saga %}
+        <li>Ce livre fait partie de la sage {{livre.saga}}.</li>
+    {% endif %}
+    <li> Il contient {{ livre.nombreMots }} mots.</li>
+</ul>
+</div>
+
+{% endblock %}

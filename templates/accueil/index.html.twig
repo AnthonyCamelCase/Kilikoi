@@ -2,14 +2,61 @@
 
 {% block title %}Accueil{% endblock %}
 
-{% block body %}
-
-
-<div class="example-wrapper text-center">
-    {% if app.user %}
-        <h1>Hello {{ app.user }} ! </h1>
-    {% else %}
-        <h1>Bonjour ami lecteur ! </h1>
-    {% endif %}
-</div>
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
 {% endblock %}
+
+
+{% block body %}
+    <div class="container text-center">
+        {% if app.user %}
+            <h1>Hello {{ app.user }} ! </h1>
+        {% else %}
+            <h1>Bonjour ami lecteur ! </h1>
+        {% endif %}
+
+        <!--<ul class="list group list-unstyled">
+            {% for livre in livres %}
+                <li><a href="/livre/{{livre.id}}" class="list-group-item list-group-item-action">
+                {{ livre.titre }}</a></li>
+            {% endfor %}
+        </ul>-->
+        
+
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">                
+                
+                <div class="carousel-item active">
+                <a href="livre/{{ livres[i].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[i].titre ~ '.jpg' )}}" alt="First slide"></a>
+                
+                </div>
+                <div class="carousel-item">
+                <a href="livre/{{ livres[j].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[j].titre ~ '.jpg' )}}" alt="First slide"></a>
+                </div>
+
+                <div class="carousel-item">
+                <a href="livre/{{ livres[k].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="First slide"></a>
+                </div>
+
+                <div class="carousel-item">
+                <a href="livre/{{ livres[k].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="First slide"></a>
+                </div>
+
+                <div class="carousel-item">
+                <a href="livre/{{ livres[k].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="First slide"></a>
+                </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+
