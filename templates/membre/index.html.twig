@@ -17,7 +17,7 @@
            
             <ul> {{ liste.nomListe }}
                 {% for livre in liste.Livre %}
-                    <li>{{ livre.titre }}</li>
+                    <li><a href="/livre/{{ livre.titre }} ">{{ livre.titre }}</a></li>
                 {% endfor %}
             </ul>           
         </li>

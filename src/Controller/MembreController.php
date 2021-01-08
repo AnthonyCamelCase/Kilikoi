@@ -15,6 +15,8 @@ class MembreController extends AbstractController
     {
         $utilisateur= $this->getUser();
         $listes = $utilisateur->getListeDeLectures();
+        
+        
         $livres = $listes[0]->getLivre();
         $nbLivres = count($livres);
         $nbMots = 0;

@@ -1,0 +1,16 @@
+
+.carousel {
+  .carousel-item {
+    height: 20em;
+
+    > *:first-child {
+      background: {
+        // image: set inline on the element
+        position: 50%;
+        repeat: no-repeat;
+        size: cover;
+      }
+      height: inherit;
+    }
+  }
+}
