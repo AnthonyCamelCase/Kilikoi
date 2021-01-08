@@ -44,6 +44,11 @@ class Commentaire
      */
     private $utilisateur;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime('now');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +85,7 @@ class Commentaire
 
     public function setDate(\DateTimeInterface $date): self
     {
+        
         $this->date = $date;
 
         return $this;

@@ -3,21 +3,23 @@
 namespace App\Controller;
 
 use App\Entity\Livre;
+use App\Repository\LivreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Length;
 
 class AccueilController extends AbstractController
 {
     /**
      * @Route("", name="accueil")
      */
-    public function index(): Response
+    public function index(LivreRepository $livres): Response
     {
-        $livres = $this->getDoctrine()
-                    ->getRepository(Livre::class)
-                    ->findAll();
+        #$livres = $this->getDoctrine()
+        #            ->getRepository(Livre::class)
+        #            ->findAll();
+          
+        $livres = $livres->findAll();
 
         $i = rand(0,count($livres)-1);
         $j = rand(0, count($livres)-1);

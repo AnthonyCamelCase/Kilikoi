@@ -15,7 +15,7 @@
             <h1>Bonjour ami lecteur ! </h1>
         {% endif %}
 
-        <!--<ul class="list group list-unstyled">
+       <!-- <ul class="list group list-unstyled">
             {% for livre in livres %}
                 <li><a href="/livre/{{livre.id}}" class="list-group-item list-group-item-action">
                 {{ livre.titre }}</a></li>
@@ -27,23 +27,23 @@
             <div class="carousel-inner">                
                 
                 <div class="carousel-item active">
-                <a href="livre/{{ livres[i].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[i].titre ~ '.jpg' )}}" alt="First slide"></a>
+                <a href="livre/{{ livres[i].titre }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[i].titre ~ '.jpg' )}}" alt="First slide"></a>
                 
                 </div>
                 <div class="carousel-item">
-                <a href="livre/{{ livres[j].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[j].titre ~ '.jpg' )}}" alt="First slide"></a>
+                <a href="livre/{{ livres[j].titre }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[j].titre ~ '.jpg' )}}" alt="Second slide"></a>
                 </div>
 
                 <div class="carousel-item">
-                <a href="livre/{{ livres[k].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="First slide"></a>
+                <a href="livre/{{ livres[k].titre }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="Third slide"></a>
                 </div>
 
                 <div class="carousel-item">
-                <a href="livre/{{ livres[k].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="First slide"></a>
+                <a href="livre/{{ livres[l].titre }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[l].titre ~ '.jpg' )}}" alt="Fourth slide"></a>
                 </div>
 
                 <div class="carousel-item">
-                <a href="livre/{{ livres[k].id }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[k].titre ~ '.jpg' )}}" alt="First slide"></a>
+                <a href="livre/{{ livres[m].titre }}"><img class="d-block m-auto w-25" src="{{ asset('image/'~ livres[m].titre ~ '.jpg' )}}" alt="Fifth slide"></a>
                 </div>
 
             </div>
