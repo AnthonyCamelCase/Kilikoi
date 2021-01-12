@@ -8,9 +8,17 @@
 <h2 class="text-center mb-4">de {{ livre.auteur }}</h2>
 
 <hr>
-
-<img class="mx-auto d-block mb-4 mt-4" src="{{ asset('image/'~ livre.titre ~ '.jpg' )}}" width="305" height="500" alt="couvertureDeLivre">
-
+<div class="container text-center">
+    <img class="mx-auto d-block mb-4 mt-4" src="{{ asset('image/'~ livre.titre ~ '.jpg' )}}" width="305" height="500" alt="couvertureDeLivre">
+    <!-- bouton ajouter à la liste de lecture -->
+    {% if app.user %}
+        {% if livre.titre in testlivre %}
+            <p>Ce livre fait partie de votre liste de lecture.</p>
+        {% else %}
+            <a href="{{path('ajoutLivre',{"titre":livre.titre}) }}">Ajouter à votre liste de lecture</a>
+        {% endif %} 
+    {% endif %}
+</div>
 <!--Affichage des infos sur le livre-->
 <div class="container ">
     <ul class="list-unstyled text-center">
@@ -19,9 +27,6 @@
         {% endif %}
         <li> Il contient {{ livre.nombreMots }} mots.</li>
     </ul>
-    {% for i in liste %}
-        
-    {% endfor %}
 </div>
 
 <hr>

@@ -27,11 +27,12 @@ class LivreController extends AbstractController
         if ($utilisateur == NULL){
             $listes=[0];
         }
+        #si oui, possibilité d'ajouter le livre à la liste si il ne l'a pas fait.
         else{
             $listes = $utilisateur->getListeDeLectures();
+            $testlivre = $listes[0]->getLivre();
         }
 
-        
         $coms = $livre->getCommentaires();
 
         // Partie création de commentaire, formulaire
@@ -63,7 +64,6 @@ class LivreController extends AbstractController
 
             return $this->redirectToRoute('livre', [
                 'titre' => $livre->getTitre(),
-
             ]);
         }
 
@@ -71,7 +71,36 @@ class LivreController extends AbstractController
             'livre' => $livre,
             'coms' => $coms,
             'formCommentaire'=> $form->createView(),
-            'liste' => $listes[0]
+            'liste' => $listes[0],
+            'testlivre'=> $testlivre,
         ]);
     }
+
+    /**
+     * @Route("/livre/{titre}/ajout", name="ajoutLivre")
+     */
+    public function ajoutLivre(Livre $livre, Request $request): Response
+    {
+        $utilisateur = $this->getUser();
+        $listes = $utilisateur->getListeDeLectures();
+        $liste = $listes[0];
+
+        //ajout du livre à la liste de lecture de l'utilisateur
+        $liste->addLivre($livre);
+
+        // on instancie Doctrine
+        $doctrine = $this->getDoctrine()->getManager();
+
+        // On hydrate $commentaire
+        $doctrine->persist($liste);
+
+        // On écrit dans la base de données
+        $doctrine->flush();
+
+        return $this->redirectToRoute('livre', [
+            'titre' => $livre->getTitre(),
+        ]);
+    
+    }
+
 }
