@@ -9,11 +9,16 @@
 
 
 		<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
 		 {% block stylesheets %}{% endblock %}
 		</head>
-		<header>
+		
+
+		<body class="bg-warning">
+			<header class="ecart">
 			<!-- navbar -->
-			<nav class="navbar navbar-expand navbar-dark bg-danger mb-4">
+			<nav class="navbar navbar-expand navbar-dark bg-danger mb-4 fixed-top">
 				<a class="navbar-brand font-weight-bold" href="#">KILIKOI</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -60,9 +65,16 @@
 			<!-- navbar -->
 		</header>
 
-		<body class="bg-warning">
-			{% block body %}{% endblock %}
+		{% block body %}
 			
+		{% endblock %}
+
+		<footer class="ecartbot" >
+			<div class="bg-danger text-light  fixed-bottom ">
+				<p class="text-center">2021 - Copyright JustWeBorn Project - Site Kilikoi</p>
+			</div>
+           
+        </footer>
 			{% block javascripts %}
 			{% endblock %}
 				<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -71,8 +83,6 @@
 		</body>
 
 
-        <footer class="bg-danger text-light mt-4 fixed-bottom">
-            <p class="text-center">2021 - Copyright JustWeBorn Project - Site Kilikoi</p>
-        </footer>
+        
 	</html>
 
