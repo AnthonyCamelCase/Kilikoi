@@ -19,6 +19,9 @@
         {% endif %}
         <li> Il contient {{ livre.nombreMots }} mots.</li>
     </ul>
+    {% for i in liste %}
+        
+    {% endfor %}
 </div>
 
 <hr>
@@ -37,29 +40,30 @@
         </p>
     </div>
     {% else %}
-    <p>Il n'y a pas encore de commentaire, publiez le premier !</p>
+    <p>Il n'y a pas encore de commentaire !</p>
     {% endfor %}
 </div>
 
-<hr>
-<!--Ajouter un commentaire sur le livre-->
-<h3 class="text-center">Ajouter un commentaire</h3>
-
-<div class="container text-center">	
-    {{ form_start(formCommentaire) }}
-
-    <div class="mb-2">{{ form_label(formCommentaire.titre) }}</div>
-
-    <div class="mb-4 ">{{ form_widget(formCommentaire.titre, { 'attr': {'placeholder': "exemple@mail.fr"}}) }}</div>
-
-    <div class="mb-2">{{ form_label(formCommentaire.contenu) }}</div>
-    <div class="mb-4">{{ form_widget(formCommentaire.contenu, { 'attr': {'placeholder': "restez correct"}}) }}</div>
-
-    <button class="btn btn-lg btn-danger">Publier le commentaire</button>
-
-    {{ form_end(formCommentaire) }}
-
-	</div>
+{% if app.user %}
+    <hr>
+    {% if livre in liste.livre %}
+        
+        <!--Ajouter un commentaire sur le livre-->
+        <h3 class="text-center">Ecrire un avis sur ce livre</h3>
+        <div class="container text-center">	
+            {{ form_start(formCommentaire) }}
+            <div class="mb-2">{{ form_label(formCommentaire.titre) }}</div>
+            <div class="mb-4 ">{{ form_widget(formCommentaire.titre, { 'attr': {'placeholder': "exemple@mail.fr"}}) }}</div>
+            <div class="mb-2">{{ form_label(formCommentaire.contenu) }}</div>
+            <div class="mb-4">{{ form_widget(formCommentaire.contenu, { 'attr': {'placeholder': "restez correct"}}) }}</div>
+            <button class="btn btn-lg btn-danger">Publier le commentaire</button>
+            {{ form_end(formCommentaire) }}
+        </div>   
+    {% else %}
+        Vous devez avoir lu et ajouter ce livre à votre liste de lecture pour donner votre avis.
+    {% endif %}
+    
+{% endif %}
 
 
 {% endblock %}

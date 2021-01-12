@@ -22,10 +22,21 @@ class LivreController extends AbstractController
         #    ->getRepository(Livre::class)
         #    ->findOneBy(['titre' => $titre]);
         $utilisateur= $this->getUser();
+        
+        #si non connecté, il n'y a pas de liste de lecture.
+        if ($utilisateur == NULL){
+            $listes=[0];
+        }
+        else{
+            $listes = $utilisateur->getListeDeLectures();
+        }
+
+        
         $coms = $livre->getCommentaires();
 
         // Partie création de commentaire, formulaire
         // On instancie l'entité commentaire
+        
         $com = new Commentaire();
 
         // Créer l'objet formulaire
@@ -60,6 +71,7 @@ class LivreController extends AbstractController
             'livre' => $livre,
             'coms' => $coms,
             'formCommentaire'=> $form->createView(),
+            'liste' => $listes[0]
         ]);
     }
 }
