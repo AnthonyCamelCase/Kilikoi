@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class LivreController extends AbstractController
@@ -25,12 +26,18 @@ class LivreController extends AbstractController
         
         #si non connecté, il n'y a pas de liste de lecture.
         if ($utilisateur == NULL){
-            $listes=[0];
+            $testlivre=NULL;
         }
         #si oui, possibilité d'ajouter le livre à la liste si il ne l'a pas fait.
         else{
             $listes = $utilisateur->getListeDeLectures();
-            $testlivre = $listes[0]->getLivre();
+            #dd($listes[0]);
+            if ($listes[0] == NULL){
+                $testlivre = NULL;
+            }
+            else{
+                $testlivre = $listes[0]->getLivre();
+            }   
         }
 
         $coms = $livre->getCommentaires();
@@ -77,6 +84,7 @@ class LivreController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/livre/{titre}/ajout", name="ajoutLivre")
      */
     public function ajoutLivre(Livre $livre, Request $request): Response
