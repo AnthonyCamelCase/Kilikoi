@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-
 class LivreController extends AbstractController
 {
     /**
@@ -92,6 +91,11 @@ class LivreController extends AbstractController
         $utilisateur = $this->getUser();
         $listes = $utilisateur->getListeDeLectures();
         $liste = $listes[0];
+
+        #obligation de créer une liste de lecture pour y ajouter des livres
+        if ($liste == NULL) {
+            return $this->redirectToRoute('liste');
+        }
 
         //ajout du livre à la liste de lecture de l'utilisateur
         $liste->addLivre($livre);
