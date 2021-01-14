@@ -1,9 +1,23 @@
 .ecart
 {
     padding-bottom: 4em;
+    
+}
+
+.navi
+{
+    background-color: rgb(61, 43, 28);
 }
 
 .ecartbot
 {
     margin-top: 4em;
 }
+
+.main
+{
+    background-image: url("../image/paper.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+

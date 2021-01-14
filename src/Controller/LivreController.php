@@ -26,6 +26,7 @@ class LivreController extends AbstractController
         #si non connecté, il n'y a pas de liste de lecture.
         if ($utilisateur == NULL){
             $testlivre=NULL;
+            $listes[0]=NULL;
         }
         #si oui, possibilité d'ajouter le livre à la liste si il ne l'a pas fait.
         else{
