@@ -85,7 +85,7 @@ class LivreController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
-     * @Route("/livre/{titre}/ajout", name="ajoutLivre")
+     * @Route("/livre/{titre}/ajoutLivre", name="ajoutLivre")
      */
     public function ajoutLivre(Livre $livre, Request $request): Response
     {
@@ -113,7 +113,48 @@ class LivreController extends AbstractController
         return $this->redirectToRoute('livre', [
             'titre' => $livre->getTitre(),
         ]);
-    
     }
 
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/livre/{com}/supprimerCom", name="supprimerCom")
+     */
+    public function supprimerCom(Commentaire $com, Request $request): Response
+    {
+        // on instancie Doctrine
+        $doctrine = $this->getDoctrine()->getManager();
+
+        // On hydrate $commentaire
+        $doctrine->remove($com);
+
+        // On écrit dans la base de données
+        $doctrine->flush();
+
+        return $this->redirectToRoute('membre');
+    }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/livre/{titre}/supprimerLivre", name="supprimerLivre")
+     */
+    public function supprimerLivre(Livre $livre, Request $request): Response
+    {
+        $utilisateur = $this->getUser();
+        $listes = $utilisateur->getListeDeLectures();
+        $liste = $listes[0];
+        
+        //ajout du livre à la liste de lecture de l'utilisateur
+        $liste->removeLivre($livre);
+
+        // on instancie Doctrine
+        $doctrine = $this->getDoctrine()->getManager();
+
+        // On hydrate $livre
+        $doctrine->persist($liste);
+
+        // On écrit dans la base de données
+        $doctrine->flush();
+
+        return $this->redirectToRoute('membre');
+    }
 }

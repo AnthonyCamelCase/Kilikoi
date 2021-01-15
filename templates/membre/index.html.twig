@@ -14,13 +14,14 @@
         <li>Nombre de mots lus : {{ nbMots }} </li>
         <li> Liste de lecture : 
         {% for liste in listes %} 
-           
             <ul> {{ liste.nomListe }}
                 {% for livre in liste.Livre %}
                     <li>
                         <a href="{{path('livre',{"titre":livre.titre}) }}">{{ livre.titre }}</a>
+                        <a href="{{path('supprimerLivre',{"titre":livre.titre}) }}">
+                        <button class="btn btn-sm btn-outline-secondary ">supprimer</button>
+                        </a>
                     </li>
-
                 {% endfor %}
             </ul>           
         </li>
@@ -32,6 +33,10 @@
                         <h3>{{ com.titre }}</h3>
                         <p>{{ com.contenu}}</p>
                         <a href="{{path('livre',{"titre":com.livre}) }}">{{ com.livre }}</a>
+                        <a href="{{path('supprimerCom',{"com":com.id}) }}">
+                        <button class="btn btn-sm btn-outline-secondary ">supprimer</button>
+                        </a>
+
                     </li> 
                 {% endfor %}
             </ul>

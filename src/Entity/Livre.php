@@ -36,7 +36,7 @@ class Livre
 
     /**
      * @ORM\ManyToOne(targetEntity=Saga::class, inversedBy="livre")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $saga;
 
