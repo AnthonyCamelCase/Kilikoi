@@ -46,7 +46,7 @@ class MembreController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/membre/liste", name="liste")
      */
-    public function liste(Request $request): Response
+    public function ajoutLivreListe(Request $request): Response
     {
         $utilisateur = $this->getUser();
 

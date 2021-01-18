@@ -26,6 +26,7 @@ class ListeDeLecture
 
     /**
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="listeDeLectures")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $utilisateur;
 
