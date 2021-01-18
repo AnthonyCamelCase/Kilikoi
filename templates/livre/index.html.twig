@@ -33,21 +33,35 @@
 <!--Affichage des commentaires sur le livre-->
 <div class="container">
     <h2 class="text-center">Les avis sur ce livre :</h2>
-    {% for com in coms %}
-    <div class="container">
-        <h3> {{ com.titre }} </h3>
-        <p> {{ com.contenu }} </p>
-        <p>
-            écrit par
-            {{ com.utilisateur }}
-            le
-            {{ com.date|date('d/m/Y') }}
-        </p>
+    <div class="row justify-content-center">
+        <ul class="list-group">
+            {% for com in coms %}
+                <li class="list-group-item">
+                    <div class="container">
+                        <div class="font-weight-bold">
+                            <h4>{{ com.titre }}</h4>
+                        </div>
+                        <div>
+                            <p>{{ com.contenu }}</p>
+                        </div>
+                        <div class="font-italic">
+                            <p>écrit par {{ com.utilisateur }} le:{{ com.date |date('d/m/Y') }}</p>
+                        </div>
+                    </div>
+                </li>
+            {% else %}
+            <p>Il n'y a pas encore de commentaire !</p>
+            {% endfor %}
+        </ul>
     </div>
-    {% else %}
-    <p>Il n'y a pas encore de commentaire !</p>
-    {% endfor %}
 </div>
+
+
+
+
+
+
+
 
 {% if app.user and liste %}
     <hr>
@@ -63,7 +77,9 @@
             <div class="mb-4">{{ form_widget(formCommentaire.contenu, { 'attr': {'placeholder': "restez correct"}}) }}</div>
             <button class="btn btn-lg btn-danger">Publier le commentaire</button>
             {{ form_end(formCommentaire) }}
-        </div>   
+        </div>  
+ 
+
     {% else %}
         Vous devez avoir lu et ajouter ce livre à votre liste de lecture pour donner votre avis.
     {% endif %}

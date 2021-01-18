@@ -135,6 +135,25 @@ class LivreController extends AbstractController
 
     /**
      * @IsGranted("ROLE_USER")
+     * @Route("/livre/{com}/editerCom", name="editerCom")
+     */
+    public function editerCom(Commentaire $com, Request $request): Response
+    {
+        // on instancie Doctrine
+        $doctrine = $this->getDoctrine()->getManager();
+
+        // On hydrate $commentaire
+        $doctrine->update($com);
+
+        // On écrit dans la base de données
+        $doctrine->flush();
+
+        return $this->redirectToRoute('membre');
+    }
+
+
+    /**
+     * @IsGranted("ROLE_USER")
      * @Route("/livre/{titre}/supprimerLivre", name="supprimerLivre")
      */
     public function supprimerLivre(Livre $livre, Request $request): Response
