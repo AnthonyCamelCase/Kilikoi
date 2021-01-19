@@ -176,4 +176,23 @@ class LivreController extends AbstractController
 
         return $this->redirectToRoute('membre');
     }
+
+    /**
+     * @Route("/search", name="search")
+     */
+    public function searchAction(Request $request):Response
+    {
+        $titre = $request->request->get('search');
+        $livre = $this->getDoctrine()->getManager()
+            ->getRepository(Livre::class)
+            ->findOneBy(['titre'=> $titre]);
+
+        if ($livre == NULL) {
+            return $this->redirectToRoute('accueil');
+        }
+        else {
+            return $this->redirectToRoute('livre',[
+            'titre' => $livre->getTitre()]);
+        }
+    }
 }

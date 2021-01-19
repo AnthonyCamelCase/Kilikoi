@@ -53,11 +53,14 @@
 					</ul>
 
 					<!-- search bar -->
-                    <form class="form-inline my-2 my-md-0">
-						<input class="form-control" type="text" placeholder="Search">
-<button type="submit" class="btn btn-default text-light">Go</button>
-
-					</form>  
+					<form  role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" name="search">
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default text-light">Go</button>
+							</span>
+						</div>
+					</form>
 				</div>
 			</nav>
 			<!-- navbar -->
