@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello
+	{{ app.user}}!
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Page membre</h1>
+
+	<!-- Info perso de l'utilisateur -->
+	<div class="container">
+		<h2 class="text-center">Bienvenue sur la page de
+			{{ utilisateur }}!
+		</h2>
+		<ul>
+			<li>Nombre de livres lus :
+				{{ nbLivres }}</li>
+			<li>Nombre de mots lus :
+				{{ nbMots }}
+			</li>
+		</ul>
+	</div>
+	<hr>
+	<!-- Liste des livres lues par l'utilisateur -->
+	<div class="container">
+		<h2 class="text-center">Liste de lecture :</h2>
+		<div class="row justify-content-center">
+			<div class="col-sm-8">
+				{% for liste in listes %}
+					<div class="flex-column">
+						{% for livre in liste.Livre %}
+							<div class="d-flex border-bottom">
+								<a class="p-2" href="{{path('livre',{"titre":livre.titre}) }}">{{ livre.titre }}</a>
+							</div>
+						{% endfor %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div
+		class="container">
+		<!-- Commentaires écrits par l'utilisateur -->
+		<h2 class="text-center">Liste des commentaires :</h2>
+		<div class="row justify-content-center">
+			<div class="col-sm-8">
+				<ul class="list-group">
+					{% for com in coms %}
+						<li class="list-group-item">
+							<div>
+								<a href="{{path('livre',{"titre":com.livre}) }}">{{ com.livre }}</a>
+							</div>
+							<div class="font-weight-bold">
+								<h4>{{ com.titre }}</h4>
+							</div>
+							<div>
+								<p>{{ com.contenu }}</p>
+							</div>
+							<div class="font-italic d-flex">
+								<p class="mr-auto p-2">écrit le : {{ com.date |date('d/m/Y') }}</p>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+            </div>
+		</div>
+	</div>
+{% endblock %}
+

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ListeDeLecture;
+use App\Entity\Utilisateur;
 use App\Form\ListeFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,4 +85,39 @@ class MembreController extends AbstractController
             'formListe' => $form->createView(),
         ]);
     }
+
+    /**
+     * @IsGranted("ROLE_USER")
+     * @Route("/membre/{pseudo}", name="visite")
+     */
+    public function infoPourVisiteur(Utilisateur $utilisateur): Response
+    {
+        //$utilisateur = $this->getDoctrine()
+        //   ->getRepository(Utilisateur::class)
+        //   ->findOneBy(['pseudo' => $visiteur]);
+
+        $listes = $utilisateur->getListeDeLectures();
+        $coms = $utilisateur->getCommentaires();
+
+        #obligation de créer une liste de lecture pour y ajouter des livres
+        if ($listes[0] == NULL) {
+            return $this->redirectToRoute('liste');
+        }
+
+        $livres = $listes[0]->getLivre();
+        $nbLivres = count($livres);
+        $nbMots = 0;
+        foreach ($livres as $livre) {
+            $nbMots += $livre->getNombreMots();
+        }
+
+        return $this->render('membre/visiteur.html.twig', [
+            'utilisateur'=> $utilisateur,
+            'listes' => $listes,
+            'nbLivres' => $nbLivres,
+            'nbMots' => $nbMots,
+            'coms' => $coms,
+        ]);
+    }
+
 }
