@@ -19,6 +19,7 @@
         {% endif %} 
     {% endif %}
 </div>
+
 <!--Affichage des infos sur le livre-->
 <div class="container ">
     <ul class="list-unstyled text-center">
@@ -34,10 +35,10 @@
 <div class="container">
     <h2 class="text-center">Les avis sur ce livre :</h2>
     <div class="row justify-content-center">
-        <ul class="list-group">
-            {% for com in coms %}
-                <li class="list-group-item">
-                    <div class="container">
+        <div class="col-sm-8">
+            <ul class="list-group">
+                {% for com in coms %}
+                    <li class="list-group-item">
                         <div class="font-weight-bold">
                             <h4>{{ com.titre }}</h4>
                         </div>
@@ -45,41 +46,39 @@
                             <p>{{ com.contenu }}</p>
                         </div>
                         <div class="font-italic">
-                            <p>écrit par {{ com.utilisateur }} le:{{ com.date |date('d/m/Y') }}</p>
+                            <p>écrit par <a href="{{path('visite',{"pseudo":com.utilisateur}) }}">{{ com.utilisateur }}</a> le : {{ com.date |date('d/m/Y') }}</p>
                         </div>
-                    </div>
-                </li>
-            {% else %}
-            <p>Il n'y a pas encore de commentaire !</p>
-            {% endfor %}
-        </ul>
+                    </li>
+                {% else %}
+                <p>Il n'y a pas encore de commentaire !</p>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
-
-
-
-
-
-
-
 
 {% if app.user and liste %}
     <hr>
     {% if livre in liste.livre %}
-        
         <!--Ajouter un commentaire sur le livre-->
         <h3 class="text-center">Ecrire un avis sur ce livre</h3>
         <div class="container text-center">	
             {{ form_start(formCommentaire) }}
-            <div class="mb-2">{{ form_label(formCommentaire.titre) }}</div>
-            <div class="mb-4 ">{{ form_widget(formCommentaire.titre, { 'attr': {'placeholder': "exemple@mail.fr"}}) }}</div>
-            <div class="mb-2">{{ form_label(formCommentaire.contenu) }}</div>
-            <div class="mb-4">{{ form_widget(formCommentaire.contenu, { 'attr': {'placeholder': "restez correct"}}) }}</div>
+            <div class="mb-2">
+                {{ form_label(formCommentaire.titre) }}
+            </div>
+            <div class="mb-4 ">
+                {{ form_widget(formCommentaire.titre, { 'attr': {'placeholder': "exemple@mail.fr"}}) }}
+            </div>
+            <div class="mb-2">
+                {{ form_label(formCommentaire.contenu) }}
+            </div>
+            <div class="mb-4">
+                {{ form_widget(formCommentaire.contenu, { 'attr': {'placeholder': "restez correct"}}) }}
+            </div>
             <button class="btn btn-lg btn-danger">Publier le commentaire</button>
             {{ form_end(formCommentaire) }}
         </div>  
- 
-
     {% else %}
         Vous devez avoir lu et ajouter ce livre à votre liste de lecture pour donner votre avis.
     {% endif %}
