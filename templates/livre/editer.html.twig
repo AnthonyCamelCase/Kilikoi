@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le commentaire
+{% endblock %}
+
+{% block body %}
+
+<div class="container text-center ">
+    
+        <h3>Editer votre avis sur {{ com.livre }}</h3>
+        <div class="row justify-content-center">
+        {{ form_start(formCommentaire) }}
+                <div class="mb-2">
+                    {{ form_label(formCommentaire.titre) }}
+                </div>
+                <div class="mb-4 ">
+                    {{ form_widget(formCommentaire.titre) }}
+                </div>
+                <div class="mb-2">
+                    {{ form_label(formCommentaire.contenu) }}
+                </div>
+                <div class="mb-4">
+                    {{ form_widget(formCommentaire.contenu) }}
+                </div>
+                <button class="btn btn-lg btn-danger">Editer le commentaire</button>
+            {{ form_end(formCommentaire) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

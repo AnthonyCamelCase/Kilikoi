@@ -25,8 +25,8 @@
                 <div class="flex-column">
                     {% for livre in liste.Livre %}
                     <div class="d-flex border-bottom">
-                            <a class="p-2"  href="{{path('livre',{"titre":livre.titre}) }}">{{ livre.titre }}</a>
-                            <a class="ml-auto p-2" href="{{path('supprimerLivre',{"titre":livre.titre}) }}">supprimer</a>
+                        <a class="p-2"  href="{{path('livre',{"titre":livre.titre}) }}">{{ livre.titre }}</a>
+                        <a class="ml-auto p-2" href="{{path('supprimerLivre',{"titre":livre.titre}) }}">supprimer</a>
                     </div>  
                     {% endfor %}
                 </div>

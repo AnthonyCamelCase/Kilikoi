@@ -56,10 +56,9 @@ class LivreController extends AbstractController
         // On vérifie si le formulaire a été envoyé et si les données sont valides
         if ($form->isSubmitted() && $form->isValid()) {
             //Ici le formulaire a été envoyé et les données sont validés
-            //$com->setArticleId($article);
             $livre->addCommentaire($com);
             $utilisateur->addCommentaire($com);
-            //$date = new \DateTime('now');
+
             // on instancie Doctrine
             $doctrine = $this->getDoctrine()->getManager();
 
@@ -139,18 +138,35 @@ class LivreController extends AbstractController
      */
     public function editerCom(Commentaire $com, Request $request): Response
     {
-        // on instancie Doctrine
-        $doctrine = $this->getDoctrine()->getManager();
+        // Créer l'objet formulaire
+        $form = $this->createForm(CommentaireType::class, $com);
 
-        // On hydrate $commentaire
-        $doctrine->update($com);
+        
+        $commentaire = $com->getContenu();
 
-        // On écrit dans la base de données
-        $doctrine->flush();
+        // On récupère les données saisies
+        $form->handleRequest($request);
 
-        return $this->redirectToRoute('membre');
+        // On vérifie si le formulaire a été envoyé et si les données sont valides
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Ici le formulaire a été envoyé et les données sont validés
+
+            // on instancie Doctrine
+            $doctrine = $this->getDoctrine()->getManager();
+
+        
+            // On écrit dans la base de données
+            $doctrine->flush();
+
+            return $this->redirectToRoute('membre');
+        }
+
+        return $this->render('/livre/editer.html.twig', [
+            'commentaire' => $commentaire,
+            'formCommentaire' => $form->createView(),
+            'com'=>$com,
+        ]);
     }
-
 
     /**
      * @IsGranted("ROLE_USER")
