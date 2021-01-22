@@ -21,3 +21,14 @@
     background-attachment: fixed;
 }
 
+.classement
+{
+    font-size: large;
+    font-weight: bold;
+}
+
+thead
+{
+    background-color: rgb(61, 43, 28) ;
+    color: white;
+}

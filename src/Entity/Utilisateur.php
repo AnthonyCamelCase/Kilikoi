@@ -59,6 +59,11 @@ class Utilisateur implements UserInterface
      */
     private $pseudo;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbMots;
+
     public function __construct()
     {
         $this->listeDeLectures = new ArrayCollection();
@@ -218,6 +223,18 @@ class Utilisateur implements UserInterface
                 $commentaire->setUtilisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbMots(): ?int
+    {
+        return $this->nbMots;
+    }
+
+    public function setNbMots(?int $nbMots): self
+    {
+        $this->nbMots = $nbMots;
 
         return $this;
     }

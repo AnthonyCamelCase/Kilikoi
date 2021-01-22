@@ -10,12 +10,16 @@
 
 {% block body %}
     <div class="container text-center">
-        {% if app.user %}
-            <h1>Hello {{ app.user }} ! </h1>
+        <h1 class="mb-4">{% if app.user %}
+            Hello {{ app.user }} ! 
         {% else %}
-            <h1>Bonjour ami lecteur ! </h1>
-        {% endif %}
+            Bonjour ami lecteur ! 
+        {% endif %}</h1>
         
+        <div class="text-justify mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae id asperiores nihil iure corporis eos, blanditiis obcaecati veniam delectus fuga quos dolorum unde aspernatur expedita earum voluptate ut, minus labore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptatum voluptates sit tempore pariatur fugiat nisi, repellat ex molestias sint. Fugit consequuntur beatae reiciendis corrupti optio hic cum quis iste.</div>
+    </div> 
+
+    <div class="container mb-4">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">                  
                 <div class="carousel-item active">
@@ -42,6 +46,58 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+        </div>    
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-sm-5 text-center">
+                <h2 class="classement">Le plus grand lecteur</h2>
+                <table class="table ">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Lecteur</th>
+                            <th scope="col">Mots</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pos in classement %}
+                        <tr>
+                            <th scope="row"> {{ loop.index }} </th>
+                            <td>
+                            <a href="{{path('visite',{"pseudo":pos.pseudo}) }}">{{ pos.pseudo }}</a>
+                            </td>
+                            <td>{{ pos.nbMots }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-5 text-center">
+                <h2 class="classement">Livre le plus lu</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Livre</th>
+                            <th scope="col">Lecteurs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pos in classement %}
+                            <tr>
+                                <th scope="row">
+                                    {{ loop.index }}
+                                </th>
+                                <td>{{ pos.pseudo }}</td>
+                                <td>{{ pos.nbMots }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 {% endblock %}

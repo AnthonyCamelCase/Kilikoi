@@ -90,23 +90,30 @@ class LivreController extends AbstractController
     {
         $utilisateur = $this->getUser();
         $listes = $utilisateur->getListeDeLectures();
-        $liste = $listes[0];
+        $liste = $listes[0]; 
 
         #obligation de créer une liste de lecture pour y ajouter des livres
         if ($liste == NULL) {
             return $this->redirectToRoute('liste');
         }
-
+        
         //ajout du livre à la liste de lecture de l'utilisateur
         $liste->addLivre($livre);
-
+        
         // on instancie Doctrine
         $doctrine = $this->getDoctrine()->getManager();
-
-        // On hydrate $commentaire
-        $doctrine->persist($liste);
-
+        
         // On écrit dans la base de données
+        $doctrine->flush();
+
+        #mise à jour de la variable pour le classement
+        $livres = $liste->getLivre();
+        $nbMots = 0;
+        foreach ($livres as $livre) {
+            $nbMots += $livre->getNombreMots();
+        }
+        $nbMots = $utilisateur->setNbMots($nbMots);
+        
         $doctrine->flush();
 
         return $this->redirectToRoute('livre', [
@@ -184,8 +191,16 @@ class LivreController extends AbstractController
         // on instancie Doctrine
         $doctrine = $this->getDoctrine()->getManager();
 
-        // On hydrate $livre
-        $doctrine->persist($liste);
+        // On écrit dans la base de données
+        $doctrine->flush();
+
+        #mise à jour de la variable pour le classement
+        $livres = $liste->getLivre();
+        $nbMots = 0;
+        foreach ($livres as $livre) {
+            $nbMots += $livre->getNombreMots();
+        }
+        $nbMots = $utilisateur->setNbMots($nbMots);
 
         // On écrit dans la base de données
         $doctrine->flush();

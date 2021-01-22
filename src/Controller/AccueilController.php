@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Livre;
+use App\Entity\Utilisateur;
 use App\Repository\LivreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,11 @@ class AccueilController extends AbstractController
         $l = rand(0, count($livres)-1);
         $m = rand(0, count($livres)-1);
 
+        $classement = $this->getDoctrine()
+                        ->getRepository(Utilisateur::class)
+                        ->findby(array(), array('nbMots' => 'DESC'));
+
+        $nbLecteur = count($classement);
 
         return $this->render('accueil/index.html.twig', [
             'livres' => $livres,
@@ -36,6 +42,8 @@ class AccueilController extends AbstractController
             'k' => $k,
             'l' => $l,
             'm' => $m,
+            'classement'=> $classement,
+            "nbLecteur"=> $nbLecteur,
         ]);
     }
 }
