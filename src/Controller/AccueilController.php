@@ -33,7 +33,9 @@ class AccueilController extends AbstractController
                         ->getRepository(Utilisateur::class)
                         ->findby(array(), array('nbMots' => 'DESC'));
 
-        $nbLecteur = count($classement);
+        $nbLecteur = $this->getDoctrine()
+            ->getRepository(Livre::class)
+            ->findby(array(), array('nbLecteur' => 'DESC'), $limit = 5);
 
         return $this->render('accueil/index.html.twig', [
             'livres' => $livres,

@@ -30,6 +30,7 @@ class MembreController extends AbstractController
         
         $livres = $listes[0]->getLivre();  
         $nbLivres = count($livres);
+        
         $nbMots = 0;
         foreach ($livres as $livre) {
             $nbMots += $livre->getNombreMots();

@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\LivreListe;
 use App\Entity\Commentaire;
+use App\Entity\ListeDeLecture;
 use App\Entity\Livre;
 use App\Form\CommentaireType;
+use App\Repository\LivreListeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,14 +109,23 @@ class LivreController extends AbstractController
         // On écrit dans la base de données
         $doctrine->flush();
 
-        #mise à jour de la variable pour le classement
+        #mise à jour de la variable pour le classement lecteur
         $livres = $liste->getLivre();
         $nbMots = 0;
         foreach ($livres as $livre) {
             $nbMots += $livre->getNombreMots();
         }
-        $nbMots = $utilisateur->setNbMots($nbMots);
+        $nbMots = $utilisateur->setNbMots($nbMots);  
+        $doctrine->flush();
+
+        #mise à jour de la variable pour le classement livre
+        $classement = $this->getDoctrine()
+            ->getRepository(Livre::class)
+            ->findByExampleField($livre->getId());
         
+        $Lecteurs = count($classement);
+        $Lecteurs = $livre->setNbLecteur($Lecteurs);
+
         $doctrine->flush();
 
         return $this->redirectToRoute('livre', [
@@ -194,15 +206,21 @@ class LivreController extends AbstractController
         // On écrit dans la base de données
         $doctrine->flush();
 
-        #mise à jour de la variable pour le classement
+        #mise à jour de la variable pour le classement lecteur
         $livres = $liste->getLivre();
         $nbMots = 0;
         foreach ($livres as $livre) {
             $nbMots += $livre->getNombreMots();
         }
         $nbMots = $utilisateur->setNbMots($nbMots);
+        $doctrine->flush();
 
-        // On écrit dans la base de données
+        #mise à jour de la variable pour le classement livre
+        $classement = $this->getDoctrine()
+            ->getRepository(Livre::class)
+            ->findByExampleField($livre->getId());
+        $Lecteurs = count($classement);
+        $Lecteurs = $livre->setNbLecteur($Lecteurs);
         $doctrine->flush();
 
         return $this->redirectToRoute('membre');

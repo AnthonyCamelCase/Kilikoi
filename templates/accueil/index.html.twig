@@ -4,9 +4,7 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
-
 {% endblock %}
-
 
 {% block body %}
     <div class="container text-center">
@@ -15,8 +13,10 @@
         {% else %}
             Bonjour ami lecteur ! 
         {% endif %}</h1>
-        
-        <div class="text-justify mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae id asperiores nihil iure corporis eos, blanditiis obcaecati veniam delectus fuga quos dolorum unde aspernatur expedita earum voluptate ut, minus labore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptatum voluptates sit tempore pariatur fugiat nisi, repellat ex molestias sint. Fugit consequuntur beatae reiciendis corrupti optio hic cum quis iste.</div>
+        <div class="text-justify mb-4">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae id asperiores nihil iure corporis eos, blanditiis obcaecati veniam delectus fuga quos dolorum unde aspernatur expedita earum voluptate ut, minus labore! Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi voluptatum voluptates sit tempore pariatur fugiat nisi, repellat ex molestias sint. Fugit consequuntur beatae reiciendis corrupti optio hic cum quis iste.
+            </p> 
+        </div>
     </div> 
 
     <div class="container mb-4">
@@ -85,19 +85,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for pos in classement %}
+                        {% for pos in nbLecteur %}
                             <tr>
                                 <th scope="row">
                                     {{ loop.index }}
                                 </th>
-                                <td>{{ pos.pseudo }}</td>
-                                <td>{{ pos.nbMots }}</td>
+                                <td>{{ pos.titre }}</td>
+                                <td>{{ pos.nbLecteur }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 {% endblock %}

@@ -50,6 +50,11 @@ class Livre
      */
     private $listeDeLectures;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nbLecteur;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -167,6 +172,18 @@ class Livre
         if ($this->listeDeLectures->removeElement($listeDeLecture)) {
             $listeDeLecture->removeLivre($this);
         }
+
+        return $this;
+    }
+
+    public function getNbLecteur(): ?int
+    {
+        return $this->nbLecteur;
+    }
+
+    public function setNbLecteur(?int $nbLecteur): self
+    {
+        $this->nbLecteur = $nbLecteur;
 
         return $this;
     }
