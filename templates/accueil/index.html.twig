@@ -3,7 +3,7 @@
 {% block title %}Accueil{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+<!--<link rel="stylesheet" href="{{ asset('css/carousel.css') }}"> -->
 {% endblock %}
 
 {% block body %}
@@ -66,7 +66,7 @@
                         <tr>
                             <th scope="row"> {{ loop.index }} </th>
                             <td>
-                            <a href="{{path('visite',{"pseudo":pos.pseudo}) }}">{{ pos.pseudo }}</a>
+                                <a href="{{path('visite',{"pseudo":pos.pseudo}) }}">{{ pos.pseudo }}</a>
                             </td>
                             <td>{{ pos.nbMots }}</td>
                         </tr>
@@ -90,7 +90,9 @@
                                 <th scope="row">
                                     {{ loop.index }}
                                 </th>
-                                <td>{{ pos.titre }}</td>
+                                <td>
+                                    <a href="{{path('livre',{"titre":pos.titre}) }}">{{ pos.titre }}</td>
+                                </td>
                                 <td>{{ pos.nbLecteur }}</td>
                             </tr>
                         {% endfor %}

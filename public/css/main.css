@@ -32,3 +32,8 @@ thead
     background-color: rgb(61, 43, 28) ;
     color: white;
 }
+
+body
+{
+    font-family: 'Pacifico', cursive; 
+}

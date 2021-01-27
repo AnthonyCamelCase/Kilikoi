@@ -68,13 +68,13 @@
                 {{ form_label(formCommentaire.titre) }}
             </div>
             <div class="mb-4 ">
-                {{ form_widget(formCommentaire.titre, { 'attr': {'placeholder': "exemple@mail.fr"}}) }}
+                {{ form_widget(formCommentaire.titre) }}
             </div>
             <div class="mb-2">
                 {{ form_label(formCommentaire.contenu) }}
             </div>
             <div class="mb-4">
-                {{ form_widget(formCommentaire.contenu, { 'attr': {'placeholder': "restez correct"}}) }}
+                {{ form_widget(formCommentaire.contenu) }}
             </div>
             <button class="btn btn-lg btn-danger">Publier le commentaire</button>
             {{ form_end(formCommentaire) }}
